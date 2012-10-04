@@ -1,6 +1,6 @@
 import logging
 import argparse
-from flask import Flask
+from flask import Flask, render_template
 from gitdash.git import Git
 
 app = Flask(__name__)
@@ -9,9 +9,7 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     log = app.git.log()
-    for line in log:
-        print line
-    return "Hello World"
+    return render_template('log.html', log=log)
 
 
 def main():

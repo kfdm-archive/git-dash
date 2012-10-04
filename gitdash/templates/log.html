@@ -1,0 +1,23 @@
+<table>
+<tr>
+    <td>Commit Hash</td>
+    <td>Author</td>
+    <td>Commit Date</td>
+    <td>Commit Message</td>
+    <td>&nbsp;</td>
+</tr>
+{% for row in log %}
+<tr>
+    <td>{{ row.hash }}</td>
+    <td>{{ row.author }}</td>
+    <td>{{ row.date }}</td>
+    <td>{{ row.message }}</td>
+    <td>
+        <form method="post">
+            <input name="commit" type="hidden" value="{{ row.hash }}" />
+            <input type="submit" value="Deploy" />
+        </form>
+    </td>
+</tr>
+{% endfor %}
+</table>
