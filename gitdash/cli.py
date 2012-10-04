@@ -1,17 +1,24 @@
 import logging
 import argparse
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from gitdash.git import Git
 
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
+    if request.method == 'POST':
+        app.git.checkout(request.form['commit'])
     return render_template('log.html',
         log=app.git.log(app.args.branch),
         head=app.git.head(),
         )
+
+
+@app.route("/update", methods=["POST"])
+def update():
+    return app.git.update()
 
 
 def main():

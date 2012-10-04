@@ -13,7 +13,7 @@
     <td>{{ row.date }}</td>
     <td>{{ row.message }}</td>
     <td>
-        <form method="post">
+        <form method="post" action="/">
             <input name="commit" type="hidden" value="{{ row.hash }}" />
             <input type="submit" value="Deploy" />
         </form>
@@ -21,3 +21,6 @@
 </tr>
 {% endfor %}
 </table>
+<form method="post" action="/update">
+    <input type="submit" value="Update" />
+</form>

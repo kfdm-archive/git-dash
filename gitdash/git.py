@@ -1,5 +1,6 @@
 import subprocess
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -41,3 +42,18 @@ class Git(object):
             return head.strip()
         except:
             return ''
+
+    def update(self):
+        try:
+            return self.run('remote', 'update', '--prune')
+        except:
+            return 'Hmm'
+
+    def checkout(self, commit):
+        if not re.match('^[\w-]+$', commit):
+            logger.error('Invalid commit: %s', commit)
+            return ''
+        try:
+            return self.run('checkout', commit)
+        except:
+            return 'foo'
