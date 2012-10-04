@@ -7,7 +7,7 @@
     <td>&nbsp;</td>
 </tr>
 {% for row in log %}
-<tr>
+<tr {% if row.hash == head %}style="background-color:#EEE"{% endif %}>
     <td>{{ row.hash }}</td>
     <td>{{ row.author }}</td>
     <td>{{ row.date }}</td>

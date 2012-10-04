@@ -10,17 +10,19 @@ class Git(object):
 
     def run(self, *args):
         command = ['git'] + list(args)
-        return subprocess.check_output(
+        logger.info(' '.join(command))
+        output = subprocess.check_output(
             command,
             cwd=self.path,
             )
+        return output
 
-    def log(self):
+    def log(self, branch):
         commits = []
         try:
-            log = self.run('log', '-n', '10', '--pretty=%H|%an|%ai|%f')
-            print log
+            log = self.run('log', '-n', '10', '--pretty=%H|%an|%ai|%f', branch)
             for line in log.splitlines():
+                logger.debug(line)
                 line = line.split('|')
                 commits.append({
                     'hash': line[0],
@@ -31,3 +33,11 @@ class Git(object):
         except:
             logger.exception("Git Log Error")
         return commits
+
+    def head(self):
+        try:
+            head = self.run('rev-parse', 'HEAD')
+            logger.info('HEAD:%s', head)
+            return head.strip()
+        except:
+            return ''

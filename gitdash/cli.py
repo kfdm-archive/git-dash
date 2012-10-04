@@ -8,13 +8,16 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    log = app.git.log()
-    return render_template('log.html', log=log)
+    return render_template('log.html',
+        log=app.git.log(app.args.branch),
+        head=app.git.head(),
+        )
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-v', '--verbosity')
+    parser.add_argument('-b', '--branch', default='master')
     parser.add_argument('repository')
     args = parser.parse_args()
 
