@@ -1,0 +1,8 @@
+setup.py
+Git_Dashboard.egg-info/PKG-INFO
+Git_Dashboard.egg-info/SOURCES.txt
+Git_Dashboard.egg-info/dependency_links.txt
+Git_Dashboard.egg-info/entry_points.txt
+Git_Dashboard.egg-info/top_level.txt
+gitdash/__init__.py
+gitdash/cli.py
